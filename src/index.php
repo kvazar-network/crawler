@@ -361,24 +361,11 @@ for ($block = $state; $block <= $blocks; $block++)
 
                 break;
 
-                case 'OP_HASH160': // @TODO not in use at this moment
-
-                    /*
-                    [0] => OP_HASH160
-                    [1] => d03b0c06f8db322a2365e41385f2c8f6f89eebe3
-                    [2] => OP_EQUAL
-                    */
-
-                    continue 2;
-
-                break;
-
-                case 'OP_RETURN': // @TODO not in use at this moment
-
-                    /*
-                    [0] => OP_RETURN
-                    [1] => aa21a9ede2f61c3f71d1defd3fa999dfa36953755c690689799962b48bebd836974e8cf9
-                    */
+                // @TODO not in use at this moment
+                case 'OP_HASH160':
+                case 'OP_RETURN':
+                case 'OP_DUP':
+                case 'OP_NOP':
 
                     continue 2;
 
