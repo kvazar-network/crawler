@@ -1,0 +1,15 @@
+{
+    "name": "kvazar/crawler",
+    "description": "KVAZAR Index Crawler",
+    "type": "project",
+    "require": {
+        "kvazar/index": "dev-main",
+        "kevachat/kevacoin": "^1.6"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Kvazar\\Crawler\\": "src/"
+        }
+    }
+}
