@@ -7,18 +7,22 @@
         "username":"",
         "password":""
     },
-    "manticore":
+    "index":
     {
-        "name":"kvazar",
-        "host":"127.0.0.1",
-        "port":9308,
-        "meta":
+        "manticore":
         {
-            "morphology":"stem_cz,stem_enru",
-            "index_exact_words":1,
-            "html_strip":1,
-            "min_word_len":3,
-            "min_prefix_len":3
-        }
+            "name":"kvazar",
+            "host":"127.0.0.1",
+            "port":9308,
+            "meta":
+            {
+                "morphology":"stem_cz,stem_enru",
+                "index_exact_words":1,
+                "html_strip":1,
+                "min_word_len":3,
+                "min_prefix_len":3
+            }
+        },
+        "driver":"manticore"
     }
 }

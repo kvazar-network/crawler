@@ -12,9 +12,6 @@ if (false === sem_acquire($semaphore, true))
     );
 }
 
-// Load dependencies
-require_once __DIR__ . '/../vendor/autoload.php';
-
 // Init config
 if (!file_exists(__DIR__ . '/../config.json'))
 {
@@ -29,25 +26,41 @@ $config = json_decode(
     )
 );
 
-// Init index
-try
-{
-    $index = new \Kvazar\Index\Manticore(
-        (string) $config->manticore->name,
-        (array)  $config->manticore->meta,
-        (string) $config->manticore->host,
-        (int)    $config->manticore->port
-    );
-}
+// Load dependencies
+require_once __DIR__ . '/../vendor/autoload.php';
 
-catch (Exception $exception)
+// Init index
+switch ($config->index->driver)
 {
-    exit(
-        print_r(
-            $exception,
-            true
-        )
-    );
+    case 'manticore':
+
+        try
+        {
+            $index = new \Kvazar\Index\Manticore(
+                (string) $config->index->manticore->name,
+                (array)  $config->index->manticore->meta,
+                (string) $config->index->manticore->host,
+                (int)    $config->index->manticore->port
+            );
+        }
+
+        catch (Exception $exception)
+        {
+            exit(
+                print_r(
+                    $exception,
+                    true
+                )
+            );
+        }
+
+    break;
+
+    default:
+
+        exit(
+            _('Undefined index driver!')
+        );
 }
 
 // Init kevacoin
