@@ -6,5 +6,7 @@
 
 ## Install
 
-* `composer create-project kvazar/crawler`
-* Add crontab task `crontab -e`: `* * * * * php kvazar/crawler/src/index.php`
+* `composer create-project kvazar/crawler crawler`
+* `cd crawler`
+* `cp example/config.json config.json`
+* `crontab -e`:`* * * * * php kvazar/crawler/src/index.php`
