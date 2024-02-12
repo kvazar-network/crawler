@@ -396,11 +396,21 @@ for ($block = $state; $block <= $blocks; $block++)
                     );
             }
 
-            // Add index record @TODO
+            // Add index record
+            $index->add(
+                $raw['time'],
+                $raw['size'],
+                $block,
+                $namespace,
+                $raw['txid'],
+                $asm[0],
+                $key,
+                $value
+            );
         }
     }
 
-    // Update current block indexed
+    // Update current block state
     file_put_contents(
         __DIR__ . '/../.state',
         $block
