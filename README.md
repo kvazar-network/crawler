@@ -11,3 +11,4 @@
 * `cp example/config.json config.json`
 * `crontab -e`:`* * * * * php kvazar/crawler/src/index.php`
   * drop index: `php kvazar/crawler/src/index.php drop`
+  * optimize index: `php kvazar/crawler/src/index.php optimize`
