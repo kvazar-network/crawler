@@ -26,6 +26,24 @@ $config = json_decode(
     )
 );
 
+// Init block
+$block = 0;
+
+if (file_exists(__DIR__ . '/../.block'))
+{
+    $block = (int) file_get_contents(
+        __DIR__ . '/../.block'
+    );
+}
+
+else
+{
+    file_put_contents(
+        __DIR__ . '/../.block',
+        $block
+    );
+}
+
 // Load dependencies
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -106,5 +124,23 @@ if (isset($argv[1]))
 }
 
 // Begin crawler
+if (false === $blocks = $kevacoin->getBlockCount())
+{
+    exit(
+        _('Could not receive blocks count!')
+    );
+}
 
-// @TODO
+for ($i = $block; $i <= $blocks; $i++)
+{
+    echo sprintf(
+        "%d/%d\r",
+        $i,
+        $blocks
+    );
+
+    file_put_contents(
+        __DIR__ . '/../.block',
+        $i
+    );
+}
