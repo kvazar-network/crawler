@@ -3,8 +3,9 @@
     "description": "KVAZAR Index Crawler",
     "type": "project",
     "require": {
-        "kvazar/index": "dev-main",
-        "kevachat/kevacoin": "^1.6"
+        "kevachat/kevacoin": "^1.6",
+        "kvazar/crypto": "dev-main",
+        "kvazar/index": "dev-main"
     },
     "license": "MIT",
     "autoload": {
