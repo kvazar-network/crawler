@@ -84,3 +84,27 @@ catch (Exception $exception)
         )
     );
 }
+
+// Init optional commands
+if (isset($argv[1]))
+{
+    switch ($argv[1])
+    {
+        // Drop index request
+        case 'drop':
+
+            $index->drop(
+                true
+            );
+
+            exit(
+                _('Index dropped!')
+            );
+
+        break;
+    }
+}
+
+// Begin crawler
+
+// @TODO
