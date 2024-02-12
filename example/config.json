@@ -1,5 +1,13 @@
 {
-    "index":
+    "kevacoin":
+    {
+        "protocol":"http",
+        "host":"127.0.0.1",
+        "port":9992,
+        "username":"",
+        "password":""
+    },
+    "manticore":
     {
         "name":"kvazar",
         "host":"127.0.0.1",
