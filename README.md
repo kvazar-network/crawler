@@ -10,6 +10,6 @@
 * `cd crawler`
 * `composer update`
 * `cp example/config.json config.json`
-* `crontab -e`:`* * * * * php kvazar/crawler/src/index.php`
-  * drop index: `php kvazar/crawler/src/index.php drop`
-  * optimize index: `php kvazar/crawler/src/index.php optimize`
+* `crontab -e`:`* * * * * php src/index.php`
+  * drop index: `php src/index.php drop`
+  * optimize index: `php src/index.php optimize`
