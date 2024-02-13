@@ -27,7 +27,7 @@ $config = json_decode(
 );
 
 // Init current block state
-$state = 1;
+$state = 0;
 
 if (file_exists(__DIR__ . '/../.state'))
 {
@@ -117,7 +117,7 @@ if (isset($argv[1]))
 
             file_put_contents(
                 __DIR__ . '/../.state',
-                1
+                0
             );
 
             exit(
@@ -147,7 +147,8 @@ if (false === $blocks = $kevacoin->getBlockCount())
     );
 }
 
-for ($block = $state; $block <= $blocks; $block++)
+// Begin block index
+for ($block = $state + 1; $block <= $blocks; $block++)
 {
     // Debug progress
     echo sprintf(
@@ -378,6 +379,6 @@ for ($block = $state; $block <= $blocks; $block++)
     // Update current block state
     file_put_contents(
         __DIR__ . '/../.state',
-        $block + 1
+        $block
     );
 }
