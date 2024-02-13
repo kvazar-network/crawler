@@ -311,31 +311,6 @@ for ($block = $state; $block <= $blocks; $block++)
 
                 break;
 
-                case 'OP_KEVA_DELETE':
-
-                    if (empty($asm[1]) || empty($asm[2]))
-                    {
-                        exit(
-                            sprintf(
-                                _('Undefined namespace or key of transaction "%s" in block "%d"!'),
-                                $transaction,
-                                $block
-                            )
-                        );
-                    }
-
-                    $namespace = \Kvazar\Crypto\Base58::encode(
-                        $asm[1], false, 0, false
-                    );
-
-                    $key = \Kvazar\Crypto\Kevacoin::decode(
-                        $asm[2]
-                    );
-
-                    $value = '';
-
-                break;
-
                 case 'OP_KEVA_NAMESPACE':
 
                     if (empty($asm[1]) || empty($asm[2]))
@@ -362,6 +337,7 @@ for ($block = $state; $block <= $blocks; $block++)
                 break;
 
                 // @TODO not in use at this moment
+                case 'OP_KEVA_DELETE':
                 case 'OP_HASH160':
                 case 'OP_RETURN':
                 case 'OP_DUP':
