@@ -352,11 +352,11 @@ for ($block = $state; $block <= $blocks; $block++)
             }
 
             // Skip base64 index
-            if ((strlen($namespace) % 4 == 0 && base64_encode(base64_decode($namespace, true)) === $namespace)
+            if (base64_encode(base64_decode($namespace, true)) === $namespace
                 ||
-                (strlen($key) % 4 == 0 && base64_encode(base64_decode($key, true)) === $key)
+                base64_encode(base64_decode($key, true)) === $key
                 ||
-                (strlen($value) % 4 == 0 && base64_encode(base64_decode($value, true)) === $value))
+                base64_encode(base64_decode($value, true)) === $value)
             {
                 continue;
             }
