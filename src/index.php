@@ -341,6 +341,16 @@ for ($block = $state; $block <= $blocks; $block++)
                     );
             }
 
+            // Skip binary content
+            if (false === mb_detect_encoding((string) $namespace, null, true)
+                ||
+                false === mb_detect_encoding((string) $key, null, true)
+                ||
+                false === mb_detect_encoding((string) $value, null, true))
+            {
+                continue;
+            }
+
             // Add index record
             $index->add(
                 $raw['time'],
