@@ -6,6 +6,7 @@
 
 ## Install
 
+* `apt install git composer manticore php-fpm php-curl php-mbstring php-pdo php-bcmath`
 * `git clone https://github.com/kvazar-network/crawler.git`
 * `cd crawler`
 * `composer update`
