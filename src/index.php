@@ -269,16 +269,10 @@ for ($block = $state; $block <= $blocks; $block++)
                 $vout['scriptPubKey']['asm']
             );
 
-            // Get operation ID required to continue
+            // Operation ID required to continue
             if (empty($asm[0]))
             {
-                exit(
-                    sprintf(
-                        _('Undefined operation of transaction "%s" in block "%d"!'),
-                        $transaction,
-                        $block
-                    )
-                );
+                continue;
             }
 
             // Detect key / value
