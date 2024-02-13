@@ -6,8 +6,9 @@
 
 ## Install
 
-* `composer create-project kvazar/crawler crawler`
+* `git clone https://github.com/kvazar-network/crawler.git`
 * `cd crawler`
+* `composer update`
 * `cp example/config.json config.json`
 * `crontab -e`:`* * * * * php kvazar/crawler/src/index.php`
   * drop index: `php kvazar/crawler/src/index.php drop`
