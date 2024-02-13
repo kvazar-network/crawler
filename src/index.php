@@ -376,6 +376,6 @@ for ($block = $state; $block <= $blocks; $block++)
     // Update current block state
     file_put_contents(
         __DIR__ . '/../.state',
-        $block
+        $block + 1
     );
 }
