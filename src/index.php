@@ -282,13 +282,7 @@ for ($block = $state; $block <= $blocks; $block++)
 
                     if (empty($asm[1]) || empty($asm[2]) || empty($asm[3]))
                     {
-                        exit(
-                            sprintf(
-                                _('Undefined namespace or key or value of transaction "%s" in block "%d"!'),
-                                $transaction,
-                                $block
-                            )
-                        );
+                        continue 2;
                     }
 
                     $namespace = \Kvazar\Crypto\Base58::encode(
@@ -309,13 +303,7 @@ for ($block = $state; $block <= $blocks; $block++)
 
                     if (empty($asm[1]) || empty($asm[2]))
                     {
-                        exit(
-                            sprintf(
-                                _('Undefined namespace or value of transaction "%s" in block "%d"!'),
-                                $transaction,
-                                $block
-                            )
-                        );
+                        continue 2;
                     }
 
                     $namespace = \Kvazar\Crypto\Base58::encode(
