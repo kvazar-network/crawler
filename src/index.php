@@ -341,12 +341,22 @@ for ($block = $state; $block <= $blocks; $block++)
                     );
             }
 
-            // Skip binary content
+            // Skip binary index
             if (false === mb_detect_encoding((string) $namespace, null, true)
                 ||
                 false === mb_detect_encoding((string) $key, null, true)
                 ||
                 false === mb_detect_encoding((string) $value, null, true))
+            {
+                continue;
+            }
+
+            // Skip base64 index
+            if ((strlen($namespace) % 4 == 0 && base64_encode(base64_decode($namespace, true)) === $namespace)
+                ||
+                (strlen($key) % 4 == 0 && base64_encode(base64_decode($key, true)) === $key)
+                ||
+                (strlen($value) % 4 == 0 && base64_encode(base64_decode($value, true)) === $value))
             {
                 continue;
             }
