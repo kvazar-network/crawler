@@ -342,26 +342,6 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                     );
             }
 
-            // Skip binary index
-            if (false === mb_detect_encoding((string) $namespace, null, true)
-                ||
-                false === mb_detect_encoding((string) $key, null, true)
-                ||
-                false === mb_detect_encoding((string) $value, null, true))
-            {
-                continue;
-            }
-
-            // Skip base64 index
-            if (base64_encode(base64_decode($namespace, true)) === $namespace
-                ||
-                base64_encode(base64_decode($key, true)) === $key
-                ||
-                base64_encode(base64_decode($value, true)) === $value)
-            {
-                continue;
-            }
-
             // Add index record
             $index->add(
                 $raw['time'],
