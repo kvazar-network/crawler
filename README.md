@@ -3,6 +3,7 @@
 ## Compatible
 
 * [webapp](https://github.com/kvazar-network/webapp)
+* [geminiapp](https://github.com/kvazar-network/geminiapp)
 
 ## Install
 
