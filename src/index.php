@@ -294,13 +294,7 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                     // Namespace info required to continue
                     if (empty($asm[1]))
                     {
-                        exit(
-                            sprintf(
-                                _('Undefined namespace of transaction "%s" in block "%d"!'),
-                                $transaction,
-                                $block
-                            )
-                        );
+                        continue;
                     }
 
                     // Decode namespace
