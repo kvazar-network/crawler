@@ -321,7 +321,7 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                             $record['height'] === $block
                             &&
                             // Skip processed transactions for this namespace
-                            !in_array($raw['txid'], $transactions)
+                            !in_array($record['txid'], $transactions)
                         ) {
                             // Register new transaction
                             $index->add(
@@ -329,14 +329,14 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                                 $raw['size'],
                                 $block,
                                 $namespace,
-                                $raw['txid'],
+                                $record['txid'],
                                 $asm[0],
                                 $record['key'],
                                 $record['value']
                             );
 
                             // Register processed transaction
-                            $transactions[] = $raw['txid'];
+                            $transactions[] = $record['txid'];
                         }
                     }
 
