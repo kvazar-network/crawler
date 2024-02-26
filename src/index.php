@@ -191,6 +191,9 @@ for ($block = $state + 1; $block <= $blocks; $block++)
         );
     }
 
+    // Reset memory pool of processed transactions for each new block
+    $transactions = [];
+
     // Process each transaction in block
     foreach ((array) $data['tx'] as $transaction)
     {
@@ -313,9 +316,13 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                         $namespace
                     ) as $record)
                     {
-                        // Get current block transactions only
-                        if ($record['height'] === $block)
-                        {
+                        if (
+                            // Get current block transactions only
+                            $record['height'] === $block
+                            &&
+                            // Skip processed transactions for this namespace
+                            !in_array($raw['txid'], $transactions)
+                        ) {
                             // Register new transaction
                             $index->add(
                                 $raw['time'],
@@ -327,6 +334,9 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                                 $record['key'],
                                 $record['value']
                             );
+
+                            // Register processed transaction
+                            $transactions[] = $raw['txid'];
                         }
                     }
 
