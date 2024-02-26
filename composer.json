@@ -3,7 +3,7 @@
     "description": "KVAZAR Index Crawler",
     "type": "project",
     "require": {
-        "kevachat/kevacoin": "^1.6",
+        "kevachat/kevacoin": "^1.10",
         "kvazar/crypto": "dev-main",
         "kvazar/index": "dev-main"
     },

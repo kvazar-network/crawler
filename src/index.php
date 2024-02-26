@@ -273,49 +273,62 @@ for ($block = $state + 1; $block <= $blocks; $block++)
             // Operation ID required to continue
             if (empty($asm[0]))
             {
-                continue;
+                exit(
+                    sprintf(
+                        _('Undefined operation of transaction "%s" in block "%d"!'),
+                        $transaction,
+                        $block
+                    )
+                );
             }
 
             // Detect key / value
             switch ($asm[0]) {
 
                 case 'OP_KEVA_PUT':
-
-                    if (empty($asm[1]) || empty($asm[2]) || empty($asm[3]))
-                    {
-                        continue 2;
-                    }
-
-                    $namespace = \Kvazar\Crypto\Base58::encode(
-                        $asm[1], false, 0, false
-                    );
-
-                    $key = \Kvazar\Crypto\Kevacoin::decode(
-                        $asm[2]
-                    );
-
-                    $value = \Kvazar\Crypto\Kevacoin::decode(
-                        $asm[3]
-                    );
-
-                break;
-
                 case 'OP_KEVA_NAMESPACE':
 
-                    if (empty($asm[1]) || empty($asm[2]))
+                    // Namespace info required to continue
+                    if (empty($asm[1]))
                     {
-                        continue 2;
+                        exit(
+                            sprintf(
+                                _('Undefined namespace of transaction "%s" in block "%d"!'),
+                                $transaction,
+                                $block
+                            )
+                        );
                     }
 
+                    // Decode namespace
                     $namespace = \Kvazar\Crypto\Base58::encode(
-                        $asm[1], false, 0, false
+                        $asm[1],
+                        false,
+                        0,
+                        false
                     );
 
-                    $key = '_KEVA_NS_';
-
-                    $value = \Kvazar\Crypto\Kevacoin::decode(
-                        $asm[2]
-                    );
+                    // Find all data by namespace
+                    foreach ((array) $kevacoin->kevaGroupFilter( // @TODO complete \Kvazar\Crypto\Kevacoin to decode tx faster
+                        $namespace
+                    ) as $record)
+                    {
+                        // Get current block transactions only
+                        if ($record['height'] == $block)
+                        {
+                            // Register new transaction
+                            $index->add(
+                                $raw['time'],
+                                $raw['size'],
+                                $block,
+                                $namespace,
+                                $raw['txid'],
+                                $asm[0],
+                                $record['key'],
+                                $record['value']
+                            );
+                        }
+                    }
 
                 break;
 
@@ -326,33 +339,19 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                 case 'OP_DUP':
                 case 'OP_NOP':
 
-                    continue 2;
-
                 break;
 
                 default:
 
                     exit(
                         sprintf(
-                            _('Undefined operation "%s" of transaction "%s" in block "%d"!'),
+                            _('Unknown operation "%s" of transaction "%s" in block "%d"!'),
                             $asm[0],
                             $transaction,
                             $block
                         )
                     );
             }
-
-            // Add index record
-            $index->add(
-                $raw['time'],
-                $raw['size'],
-                $block,
-                $namespace,
-                $raw['txid'],
-                $asm[0],
-                $key,
-                $value
-            );
         }
     }
 
