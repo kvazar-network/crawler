@@ -276,13 +276,7 @@ for ($block = $state + 1; $block <= $blocks; $block++)
             // Operation ID required to continue
             if (empty($asm[0]))
             {
-                exit(
-                    sprintf(
-                        _('Undefined operation of transaction "%s" in block "%d"!'),
-                        $transaction,
-                        $block
-                    )
-                );
+                continue;
             }
 
             // Detect key / value
@@ -294,7 +288,13 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                     // Namespace info required to continue
                     if (empty($asm[1]))
                     {
-                        continue;
+                        exit(
+                            sprintf(
+                                _('Undefined namespace of transaction "%s" in block "%d"!'),
+                                $transaction,
+                                $block
+                            )
+                        );
                     }
 
                     // Decode namespace
