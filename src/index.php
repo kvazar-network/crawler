@@ -309,12 +309,12 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                     );
 
                     // Find all data by namespace
-                    foreach ((array) $kevacoin->kevaGroupFilter( // @TODO complete \Kvazar\Crypto\Kevacoin to decode tx faster
+                    foreach ((array) $kevacoin->kevaFilter( // @TODO complete \Kvazar\Crypto\Kevacoin to decode tx faster
                         $namespace
                     ) as $record)
                     {
                         // Get current block transactions only
-                        if ($record['height'] == $block)
+                        if ($record['height'] === $block)
                         {
                             // Register new transaction
                             $index->add(
