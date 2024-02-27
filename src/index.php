@@ -305,16 +305,45 @@ for ($block = $state + 1; $block <= $blocks; $block++)
                         false
                     );
 
-                    // Find all data by namespace
-                    foreach ((array) $kevacoin->kevaFilter( // @TODO complete \Kvazar\Crypto\Kevacoin to decode tx faster
+                    // Find natively decoded data in block by namespace
+                    // https://github.com/kvazar-network/crawler/issues/1
+                    // @TODO complete \Kvazar\Crypto\Kevacoin to decode tx faster
+                    foreach ((array) $kevacoin->kevaFilter(
                         $namespace
                     ) as $record)
                     {
                         if (
-                            // Get current block transactions only
+                            // Filter current block only
                             $record['height'] === $block
                             &&
-                            // Skip processed transactions for this namespace
+                            // Skip processed transaction
+                            !in_array($record['txid'], $transactions)
+                        ) {
+                            // Register new transaction
+                            $index->add(
+                                $raw['time'],
+                                $raw['size'],
+                                $block,
+                                $namespace,
+                                $record['txid'],
+                                $asm[0],
+                                $record['key'],
+                                $record['value']
+                            );
+
+                            // Register processed transaction
+                            $transactions[] = $record['txid'];
+                        }
+                    }
+
+                    // Find namespace alias (not always return by kevaFilter)
+                    if ($record = $kevacoin->kevaGet($namespace, '_KEVA_NS_'))
+                    {
+                        if (
+                            // Filter current block only
+                            $record['height'] === $block
+                            &&
+                            // Skip processed transaction
                             !in_array($record['txid'], $transactions)
                         ) {
                             // Register new transaction
