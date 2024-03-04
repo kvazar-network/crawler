@@ -142,6 +142,10 @@ if (isset($argv[1]))
 // Begin crawler
 if (!$blocks = $kevacoin->getBlockCount())
 {
+    var_dump(
+        $kevacoin->getError()
+    );
+
     exit(
         _('Could not receive blocks count!')
     );
@@ -160,6 +164,10 @@ for ($block = $state + 1; $block <= $blocks; $block++)
     // Get block hash
     if (!$hash = $kevacoin->getBlockHash($block))
     {
+        var_dump(
+            $kevacoin->getError()
+        );
+
         exit(
             sprintf(
                 _('Could not receive "%d" block hash!'),
@@ -171,6 +179,10 @@ for ($block = $state + 1; $block <= $blocks; $block++)
     // Get block data
     if (!$data = $kevacoin->getBlock($hash))
     {
+        var_dump(
+            $kevacoin->getError()
+        );
+
         exit(
             sprintf(
                 _('Could not receive "%d" block data by hash "%s"!'),
@@ -200,6 +212,10 @@ for ($block = $state + 1; $block <= $blocks; $block++)
         // Validate each transaction
         if (!$raw = $kevacoin->getRawTransaction($transaction))
         {
+            var_dump(
+                $kevacoin->getError()
+            );
+
             exit(
                 sprintf(
                     _('Could not receive raw transaction "%s" in block "%d"!'),
