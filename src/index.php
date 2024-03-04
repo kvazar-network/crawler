@@ -140,7 +140,7 @@ if (isset($argv[1]))
 }
 
 // Begin crawler
-if (false === $blocks = $kevacoin->getBlockCount())
+if (!$blocks = $kevacoin->getBlockCount())
 {
     exit(
         _('Could not receive blocks count!')
