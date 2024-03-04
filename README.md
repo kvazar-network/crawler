@@ -11,7 +11,12 @@
 * `git clone https://github.com/kvazar-network/crawler.git`
 * `cd crawler`
 * `composer update`
+
+## Setup
+
 * `cp example/config.json config.json`
 * `crontab -e`:`* * * * * php src/index.php`
   * drop index: `php src/index.php drop`
   * optimize index: `php src/index.php optimize`
+
+_To prevent data lose on server failures, set [binlog flush strategy](https://manual.manticoresearch.com/Logging/Binary_logging#Binary-flushing-strategies) to `binlog_flush = 1` in `/etc/manticoresearch/manticore.conf`_
