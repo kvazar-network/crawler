@@ -212,17 +212,7 @@ for ($block = $state + 1; $block <= $blocks; $block++)
         // Validate each transaction
         if (!$raw = $kevacoin->getRawTransaction($transaction))
         {
-            var_dump(
-                $kevacoin->getError()
-            );
-
-            exit(
-                sprintf(
-                    _('Could not receive raw transaction "%s" in block "%d"!'),
-                    $transaction,
-                    $block
-                )
-            );
+            continue;
         }
 
         if (empty($raw['txid']))
